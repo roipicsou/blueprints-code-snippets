@@ -1,0 +1,121 @@
+{
+  "name": "blueprints-code-snippets",
+  "displayName": "Blueprints Code Snippets",
+  "description": "Extension VS Code pour sauvegarder et gérer des extraits de code réutilisables (Blueprints) avec vue personnalisée, filtrage par langage, et choix du stockage local/global.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.101.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "blueprintsViewContainer",
+          "title": "Blueprints",
+          "icon": "resources/blueprint.svg"
+        }
+      ]
+    },
+    "views": {
+      "blueprintsViewContainer": [
+        {
+          "id": "blueprintsView",
+          "name": "Blueprints"
+        }
+      ],
+      "explorer": [
+        {
+          "id": "blueprintsLanguageView",
+          "name": "Blueprints (Langage)"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "blueprints-code-snippets.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "blueprints.saveSnippet",
+        "title": "Ajouter un Blueprint"
+      },
+      {
+        "command": "blueprints.deleteSnippet",
+        "title": "Supprimer le Blueprint"
+      },
+      {
+        "command": "blueprints.saveSnippetFromExplorer",
+        "title": "Ajouter un Blueprint (Explorer)"
+      },
+      {
+        "command": "blueprints.deleteSnippetFromExplorer",
+        "title": "Supprimer le Blueprint (Explorer)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "blueprints.saveSnippet",
+          "when": "view == blueprintsView",
+          "group": "navigation@1"
+        },
+        {
+          "command": "blueprints.saveSnippetFromExplorer",
+          "when": "view == blueprintsLanguageView",
+          "group": "navigation@1"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "blueprints.deleteSnippet",
+          "when": "view == blueprintsView && viewItem == blueprint",
+          "group": "inline@2"
+        },
+        {
+          "command": "blueprints.deleteSnippetFromExplorer",
+          "when": "view == blueprintsLanguageView && viewItem == blueprint",
+          "group": "inline@2"
+        }
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "Blueprints",
+      "properties": {
+        "blueprints.storageMode": {
+          "type": "string",
+          "enum": [
+            "local",
+            "global"
+          ],
+          "default": "local",
+          "description": "Choix de l'emplacement de stockage des blueprints : local (.vscode) ou global (VS Code globalStorage)."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.101.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
+    "eslint": "^9.25.1",
+    "typescript": "^5.8.3",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}
