@@ -141,7 +141,7 @@ export function activate(context: vscode.ExtensionContext) {
 				const data = fs.readFileSync(path.join(dir, file), 'utf8');
 				const blueprints: Blueprint[] = JSON.parse(data);
 				all = all.concat(blueprints);
-			} catch {}
+			} catch { }
 		}
 		return all;
 	}
@@ -205,34 +205,34 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// TreeView secondaire pour l'explorer : Blueprints (Langage)
 	class BlueprintsLanguageProvider implements vscode.TreeDataProvider<BlueprintTreeItem> {
-	private _onDidChangeTreeData: vscode.EventEmitter<BlueprintTreeItem | undefined | void> = new vscode.EventEmitter<BlueprintTreeItem | undefined | void>();
-	readonly onDidChangeTreeData: vscode.Event<BlueprintTreeItem | undefined | void> = this._onDidChangeTreeData.event;
+		private _onDidChangeTreeData: vscode.EventEmitter<BlueprintTreeItem | undefined | void> = new vscode.EventEmitter<BlueprintTreeItem | undefined | void>();
+		readonly onDidChangeTreeData: vscode.Event<BlueprintTreeItem | undefined | void> = this._onDidChangeTreeData.event;
 
-	private blueprints: Blueprint[] = [];
-	private currentLanguage: string = 'plaintext';
+		private blueprints: Blueprint[] = [];
+		private currentLanguage: string = 'plaintext';
 
-	refresh(blueprints: Blueprint[], language: string): void {
-		this.blueprints = blueprints;
-		this.currentLanguage = language;
-		this._onDidChangeTreeData.fire();
-	}
-
-	getTreeItem(element: BlueprintTreeItem): vscode.TreeItem {
-		return element;
-	}
-
-	getChildren(): Thenable<BlueprintTreeItem[]> {
-		if (!this.currentLanguage) {
-			return Promise.resolve([]);
+		refresh(blueprints: Blueprint[], language: string): void {
+			this.blueprints = blueprints;
+			this.currentLanguage = language;
+			this._onDidChangeTreeData.fire();
 		}
-		const filtered = this.blueprints.filter(bp => bp.language === this.currentLanguage);
-		return Promise.resolve(filtered.map(bp => new BlueprintTreeItem(bp)));
-	}
 
-	public getBlueprints(): Blueprint[] {
-		return this.blueprints;
+		getTreeItem(element: BlueprintTreeItem): vscode.TreeItem {
+			return element;
+		}
+
+		getChildren(): Thenable<BlueprintTreeItem[]> {
+			if (!this.currentLanguage) {
+				return Promise.resolve([]);
+			}
+			const filtered = this.blueprints.filter(bp => bp.language === this.currentLanguage);
+			return Promise.resolve(filtered.map(bp => new BlueprintTreeItem(bp)));
+		}
+
+		public getBlueprints(): Blueprint[] {
+			return this.blueprints;
+		}
 	}
-}
 
 	// Remplace le provider de la vue secondaire par la version non-arborescente
 	const blueprintsLanguageProvider = new BlueprintsLanguageProvider();

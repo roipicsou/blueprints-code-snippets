@@ -1,53 +1,79 @@
 # Blueprints Code Snippets
 
-Blueprints Code Snippets est une extension VS Code permettant de sauvegarder, organiser et insérer rapidement des extraits de code réutilisables (Blueprints).
+Extension VS Code pour sauvegarder, organiser, insérer, afficher et supprimer des extraits de code réutilisables (Blueprints) avec :
+
+- **Vue personnalisée dans l’Activity Bar** regroupant tous les Blueprints par langage (arborescence)
+- **Vue plate dans l’Explorer** affichant uniquement les Blueprints du langage du fichier actif
+- **Ajout, suppression, insertion** de Blueprints depuis les deux vues
+- **Stockage local/global configurable** (choix à chaque ajout)
+- **Fonctionnement silencieux** (aucune notification intrusive)
+- **Gestion dynamique** selon le langage du fichier actif
 
 ## Fonctionnalités principales
-- **Vue personnalisée dans l’Activity Bar** : Accès rapide à vos Blueprints.
-- **Filtrage dynamique** : Affiche uniquement les Blueprints du langage du fichier actif.
-- **Ajout rapide** : Commande et bouton pour sauvegarder la sélection courante comme Blueprint.
-- **Insertion en un clic** : Cliquez sur un Blueprint pour l’insérer à l’emplacement du curseur.
-- **Stockage configurable** : Choisissez entre stockage local (.vscode/blueprints) ou global (globalStorage).
 
-## Paramètres de l’extension
-- `blueprints.storageMode` :
-  - `local` (défaut) : Stocke les Blueprints dans `.vscode/blueprints/` du projet.
-  - `global` : Stocke les Blueprints dans le dossier globalStorage de VS Code.
+- Sauvegardez n’importe quel extrait de code comme Blueprint, avec nom et description
+- Organisez vos Blueprints par langage
+- Insérez un Blueprint dans l’éditeur en un clic
+- Supprimez ou ajoutez des Blueprints depuis l’Activity Bar ou l’Explorer
+- Choisissez à chaque ajout si le Blueprint est stocké localement (dans le projet) ou globalement (pour tous vos projets)
 
-## Commandes
-- `blueprints.saveSnippet` : Sauvegarder la sélection comme Blueprint.
-- `blueprints.insertSnippet` : Insérer un Blueprint sélectionné.
-- `blueprints.refreshView` : Actualiser la vue Blueprints.
+## Installation locale
 
-## Structure de fichiers
-- **Local** : `.vscode/blueprints/<langage>.json`
-- **Global** : `globalStorage/<extension-id>/blueprints/<langage>.json`
+1. **Cloner le dépôt**
+   ```sh
+   git clone https://github.com/<votre-utilisateur>/blueprints-code-snippets.git
+   cd blueprints-code-snippets
+   ```
+2. **Installer les dépendances et compiler**
+   ```sh
+   npm install
+   npm run compile
+   ```
+3. **Générer le package VSIX** (optionnel, pour installation manuelle)
+   ```sh
+   npm install -g @vscode/vsce
+   vsce package
+   # Puis installer le .vsix dans VS Code
+   # code --install-extension blueprints-code-snippets-<version>.vsix
+   ```
+4. **Ouverture en mode développement**
+   - Ouvrez le dossier dans VS Code
+   - Appuyez sur F5 pour lancer une nouvelle fenêtre VS Code avec l’extension chargée
 
-## Prochaines étapes
-- Implémentation de la vue TreeView et des commandes.
-- Gestion du stockage et de la configuration.
+## Publication sur GitHub
 
-Pour toute contribution ou suggestion, ouvrez une issue sur le dépôt du projet.
+1. Initialisez un dépôt Git si besoin :
+   ```sh
+   git init
+   git add .
+   git commit -m "Initial commit"
+   ```
+2. Créez un dépôt sur GitHub et poussez :
+   ```sh
+   git remote add origin https://github.com/<votre-utilisateur>/blueprints-code-snippets.git
+   git branch -M main
+   git push -u origin main
+   ```
+
+## Utilisation
+
+- **Ajouter un Blueprint** :
+  - Sélectionnez du code dans l’éditeur
+  - Cliquez sur le bouton “Ajouter un Blueprint” dans la vue Blueprints ou Blueprints (Langage)
+  - Renseignez le nom, la description, puis choisissez le mode de stockage (local/global)
+- **Insérer un Blueprint** :
+  - Cliquez sur un Blueprint dans la vue pour l’insérer à l’emplacement du curseur
+- **Supprimer un Blueprint** :
+  - Clic droit sur un Blueprint > Supprimer
+
+## Configuration
+
+- `blueprints.storageMode` : Définit le mode de stockage par défaut (local ou global). Le choix reste proposé à chaque ajout.
+
+## Contribution
+
+Les contributions sont les bienvenues ! Ouvrez une issue ou une pull request.
 
 ---
 
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+© 2025 - Blueprints Code Snippets
